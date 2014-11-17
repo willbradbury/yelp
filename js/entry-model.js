@@ -4,8 +4,7 @@
   var ENTRIES_URL = 'http://callbackjs.me:4155/entries';
   var STATUS_OK = 200;
 
-  /* Load all entries from the server. Call successCallback on success,
-   * and errorCallback on error.
+  /* Loads all entries from the server.
    *
    * Calls: callback(error, entries)
    *  error -- the error that occurred or NULL if no error occurred
@@ -15,7 +14,7 @@
     // TODO
   };
 
-  /* Add the given entry to the list of entries. The entry must *not* have
+  /* Adds the given entry to the list of entries. The entry must *not* have
    * an id associated with it.
    *
    * Calls: callback(error, entry)
@@ -26,7 +25,7 @@
     // TODO
   };
 
-  /* Update the given entry. The entry must have an id attribute that
+  /* Updates the given entry. The entry must have an id attribute that
    * identifies it.
    *
    * Calls: callback(error)
