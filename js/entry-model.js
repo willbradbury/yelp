@@ -11,7 +11,16 @@
    *  entries -- an array of entries
    */
   EntryModel.loadAll = function(callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+    request.addEventListener('load',function(){
+      if(request.status != STATUS_OK){
+        callback(request.responseText);
+      }else{
+        callback(null,JSON.parse(request.responseText));
+      }
+    });
+    request.open("GET",ENTRIES_URL);
+    request.send();
   };
 
   /* Adds the given entry to the list of entries. The entry must *not* have
@@ -22,7 +31,17 @@
    *  entry -- the entry added, with an id attribute
    */
   EntryModel.add = function(entry, callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+    request.addEventListener('load',function(){
+      if(request.status != STATUS_OK){
+        callback(request.responseText);
+      }else{
+        callback(null,JSON.parse(request.responseText));
+      }
+    });
+    request.open('POST',ENTRIES_URL);
+    request.setRequestHeader('Content-type','application/json');
+    request.send(JSON.stringify(entry));
   };
 
   /* Updates the given entry. The entry must have an id attribute that
@@ -30,9 +49,20 @@
    *
    * Calls: callback(error)
    *  error -- the error that occurred or NULL if no error occurred
+   *  entry -- the entry updated (this is non-standard but makes life easier)
    */
   EntryModel.update = function(entry, callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+    request.addEventListener('load',function(){
+      if(request.status != STATUS_OK){
+        callback(request.responseText);
+      }else{
+        callback(null,JSON.parse(request.responseText));
+      }
+    });
+    request.open('POST',ENTRIES_URL+"/"+entry.id);
+    request.setRequestHeader('Content-type','application/json');
+    request.send(JSON.stringify(entry));
   };
 
   /* Deletes the entry with the given id.
@@ -41,7 +71,17 @@
    *  error -- the error that occurred or NULL if no error occurred
    */
   EntryModel.remove = function(id, callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+    request.addEventListener('load',function(){
+      if(request.status != STATUS_OK){
+        callback(request.responseText);
+      }else{
+        callback(null);
+      }
+    });
+    request.open('POST',ENTRIES_URL+"/"+id+"/delete");
+    request.setRequestHeader('Content-type','application/json');
+    request.send();
   };
 
   window.EntryModel = EntryModel;
